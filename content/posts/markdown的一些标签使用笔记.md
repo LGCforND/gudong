@@ -6,8 +6,7 @@ draft: false
 
 参考 [markdown官方](https://www.markdown.xyz/basic-syntax/#bold)  
 # detail
-
-一个标记，先忽略，后面有彩蛋
+*一个标记，先忽略，后面有彩蛋*
 
 ## 粗体 （Bold）   
 
@@ -139,8 +138,11 @@ Visit the [Hugo](https://gohugo.io "gohugo") website!
 <715759903@qq.com>
 
 其他的一些用法可以查看文章前面的的Markdown官网链接。这边提个问题，如果这边要引用文章的前面的标题快速回首行，怎么做呢？  
-
+```yaml
 [首行](#detail)  
+```
+[首行](#detail)  
+
 
 
 

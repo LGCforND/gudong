@@ -79,3 +79,41 @@ hugo server # 查看发布的
 hugo server -D # 包含草稿 draft: true的标识  
 ```  
 
+### 编译成静态文件
+```yaml
+hugo  # 执行命令后会出现public的文件夹，我们只需要将这文件夹拷贝放到站点即可
+```
+
+###  docker 资源挂载方式部署
+nginx镜像资源挂载方式
+```yaml
+---
+version: '2'
+  nginx:
+    restart: always
+    image: nginx
+    container_name: nginx
+    ports:
+      - 80:80
+    volumes:
+      - /data/nginx/nginx.conf:/etc/nginx/nginx.conf  ## 这个网上查下或者用官方的
+      - /data/nginx/conf.d:/etc/nginx/conf.d
+      - /data/nginx/public:/usr/share/nginx/html
+      - /data/nginx/log:/var/log/nginx
+```
+
+## docker镜像部署
+dockerfile
+```yaml
+## gudong dockerfile
+FROM nginx:alpine
+WORKDIR /
+ADD ./public /usr/share/nginx/html
+COPY ./nginx_conf/gudong.conf /etc/nginx/conf.d/
+EXPOSE 80
+ENV NAME Gic
+CMD ["nginx", "-g", "daemon off;"]
+```
+compose文件类似资源挂载的方式，只不过不需要资源挂载了。
+不过hugo.toml的文件里的baseURL记得修改成对应站点的地址，否则无法正常渲染访问
+
